@@ -78,9 +78,11 @@ def security(resp):
         "default-src 'self'; "
         "script-src 'self' 'unsafe-inline' https://cdn.socket.io; "
         "style-src 'self' 'unsafe-inline'; "
+        "font-src 'self' data:; "
         "img-src 'self' data: blob:; "
         "connect-src 'self' wss: https:; "
-        "media-src 'self' blob:; frame-ancestors 'none';")
+        "media-src 'self' blob:; "
+        "frame-ancestors 'none';")
     return resp
 
 socketio = SocketIO(app, cors_allowed_origins=ALLOWED if '*' not in ALLOWED else '*', async_mode='threading')
