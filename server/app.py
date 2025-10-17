@@ -41,20 +41,10 @@ csrf = CSRFProtect(app)
 
 if os.getenv('FLASK_ENV') == 'production':
     from flask_talisman import Talisman
-    csp = {
-        'default-src': "'self'",
-        'script-src': ["'self'", "'unsafe-inline'", 'https://cdn.socket.io'],
-        'style-src': ["'self'", "'unsafe-inline'"],
-        'img-src': ["'self'", 'data:', 'blob:'],
-        'connect-src': ["'self'", 'wss:', 'https:'],
-        'media-src': ["'self'", 'blob:'],
-        'frame-ancestors': "'none'"
-    }
     Talisman(app, 
              force_https=True, 
              strict_transport_security_max_age=31536000,
-             content_security_policy=csp,
-             content_security_policy_nonce_in=['script-src'])
+             content_security_policy=False)
 
 limiter = Limiter(
     app=app,

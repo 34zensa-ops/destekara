@@ -342,6 +342,19 @@ html, body {
   justify-content: center;
 }
 
+.video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 20px;
+}
+
 .call-header {
   position: absolute;
   top: 20px;
