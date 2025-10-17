@@ -3,7 +3,7 @@ const cardsEl = document.getElementById('cards');
 const pill = document.getElementById('pillState');
 const meta = document.getElementById('summaryMeta');
 const report = document.getElementById('report');
-const timesWrap = document.getElementById('times');
+const timesEl = document.getElementById('times');
 
 const CATS = ['health','security','chat','webrtc','db','admin','upload'];
 
@@ -121,7 +121,7 @@ async function repairSafe() {
 async function loadSchedule() {
   const r = await fetch('/api/test/schedule');
   const out = await r.json();
-  timesWrap.innerHTML = '';
+  timesEl.innerHTML = '';
   (out.times || []).forEach(t => {
     const chip = document.createElement('span');
     chip.className = 'chip';
@@ -138,7 +138,7 @@ async function loadSchedule() {
     };
     chip.appendChild(btn);
     
-    timesWrap.appendChild(chip);
+    timesEl.appendChild(chip);
   });
 }
 
