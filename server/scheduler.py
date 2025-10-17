@@ -3,7 +3,7 @@ try:
     from zoneinfo import ZoneInfo
 except ImportError:
     from backports.zoneinfo import ZoneInfo
-from .testsuite import run_all_tests_and_report
+from .testsuite import run_tests
 from .storage import list_test_schedules
 
 sched = BackgroundScheduler()
@@ -14,7 +14,7 @@ def refresh_jobs():
         if not r.enabled:
             continue
         hh, mm = map(int, r.time_hhmm.split(':'))
-        sched.add_job(run_all_tests_and_report, 'cron', hour=hh, minute=mm, timezone=ZoneInfo(r.tz), id=f"test@{r.time_hhmm}")
+        sched.add_job(run_tests, 'cron', hour=hh, minute=mm, timezone=ZoneInfo(r.tz), id=f"test@{r.time_hhmm}")
 
 def start_scheduler():
     if not sched.running:
