@@ -37,7 +37,7 @@
 
 ```bash
 # Repository'yi klonlayın
-git clone https://github.com/YOUR_USERNAME/konusma.git
+git clone https://github.com/34zensa-ops/destekara.git
 cd konusma
 
 # Sanal ortam oluşturun
@@ -86,7 +86,7 @@ git push -u origin main
 ### 2. Render'da Deploy
 
 1. **[Render Dashboard](https://dashboard.render.com/)** → **New** → **Web Service**
-2. **GitHub repo'nuzu bağlayın:** `YOUR_USERNAME/konusma`
+2. **GitHub repo'nuzu bağlayın:** `34zensa-ops/destekara`
 3. **Ayarlar:**
    ```
    Name: konusma-app
@@ -251,7 +251,7 @@ konuşma/
 
 ## 🐛 Sorun Bildirimi
 
-Sorun mu buldunuz? [GitHub Issues](https://github.com/YOUR_USERNAME/konusma/issues) sayfasından bildirebilirsiniz.
+Sorun mu buldunuz? [GitHub Issues](https://github.com/34zensa-ops/destekara/issues) sayfasından bildirebilirsiniz.
 
 ## 📧 İletişim
 
@@ -263,6 +263,6 @@ Sorularınız için GitHub Issues kullanın veya repository'yi star'layıp takip
 
 **⭐ Beğendiyseniz star vermeyi unutmayın!**
 
-[![GitHub stars](https://img.shields.io/github/stars/YOUR_USERNAME/konusma?style=social)](https://github.com/YOUR_USERNAME/konusma/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/34zensa-ops/destekara?style=social)](https://github.com/34zensa-ops/destekara/stargazers)
 
 </div>
