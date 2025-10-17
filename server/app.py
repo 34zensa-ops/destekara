@@ -73,7 +73,7 @@ def security(resp):
         resp.headers.setdefault('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
     resp.headers.setdefault('Content-Security-Policy',
         "default-src 'self'; "
-        "script-src 'self' https://cdn.socket.io; "
+        "script-src 'self' 'unsafe-inline' https://cdn.socket.io; "
         "style-src 'self' 'unsafe-inline'; "
         "img-src 'self' data: blob:; "
         "connect-src 'self' wss: https:; "
