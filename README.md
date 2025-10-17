@@ -1,4 +1,4 @@
-# 📞 Sesli ve Yazılı Konuşma
+﻿# 📞 Sesli ve Yazılı Konuşma
 
 > Modern, mobil-first chat + WebRTC sesli/görüntülü arama platformu
 

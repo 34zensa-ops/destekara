@@ -7,4 +7,4 @@ USER app
 EXPOSE 10000
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:10000/health')" || exit 1
-CMD ["gunicorn", "-k", "eventlet", "-w", "1", "server.app:app", "--bind", "0.0.0.0:10000"]
+CMD ["python", "-m", "server.app"]
