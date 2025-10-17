@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=5,user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0EA5E9">
+  <title>Konuşma - Admin Muhsin İle Görüşme</title>
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/chat.css">
+</head>
+<body>
+  <div class="page">
+    <div id="nameModal" class="welcome-screen">
+      <div class="welcome-card">
+        <div class="admin-avatar">👨</div>
+        <h1>Admin Muhsin İle Görüşme</h1>
+        <p>Sesli veya yazılı olarak güvenli görüşme yapın</p>
+        <div class="security-emojis">
+          <span>🔒</span>
+          <span>✓</span>
+          <span>🛡️</span>
+        </div>
+        <div class="security-text">Güvenli ve şifreli bağlantı</div>
+        <input id="nameInput" class="welcome-input" placeholder="Lütfen adınızı girin" maxlength="30" />
+        <button id="btnStartChat" class="welcome-btn">Görüşmeye Başla</button>
+      </div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+      <header class="chat-header">
+        <div class="header-left">
+          <div class="header-avatar">👨</div>
+          <div class="header-info">
+            <h2>Admin Muhsin</h2>
+            <div class="header-status">
+              <div class="status-dot"></div>
+              Aktif
+            </div>
+          </div>
+        </div>
+        <button id="btnCall" class="call-btn">📞 Ara</button>
+      </header>
+
+      <div class="messages-area">
+        <ul id="msgs" class="msgs"></ul>
+      </div>
+
+      <footer class="chat-footer">
+        <button id="btnEmoji" class="footer-btn">😊</button>
+        <div class="emoji-picker hidden" id="emojiPicker"></div>
+        <div class="input-area">
+          <input id="txt" class="message-input" placeholder="Mesaj yazın..." />
+          <input id="fileImg" type="file" accept="image/*" hidden />
+          <input id="fileAud" type="file" accept="audio/*" hidden />
+          <button id="btnImg" class="footer-btn">🖼️</button>
+          <button id="btnAud" class="footer-btn">🎤</button>
+        </div>
+        <button id="btnSend" class="send-btn">Gönder</button>
+      </footer>
+    </div>
+
+    <div class="call-screen" id="callScreen">
+      <div class="call-video-area">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;color:#999;font-size:20px;">📹 Video Akışı</div>
+        <video class="local-video" id="localVideo"></video>
+        <div class="call-header">
+          <div class="call-user-info">
+            <h3>Admin Muhsin</h3>
+            <div class="call-duration" id="callDuration">00:00</div>
+          </div>
+          <div class="call-warning">📞 Bağlısınız</div>
+          <button class="fullscreen-btn" id="btnFullscreen">⛶</button>
+        </div>
+        <div class="call-controls">
+          <button class="control-btn" id="micBtn">🎤</button>
+          <button class="control-btn" id="speakerBtn">🔊</button>
+          <button class="control-btn" id="cameraBtn">📹</button>
+          <button class="control-btn" id="dialBtn">📞</button>
+          <button class="control-btn end" id="endCallBtn">☎️</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="audio-only-screen" id="audioOnlyScreen">
+      <div class="audio-avatar">👤</div>
+      <div class="audio-info">
+        <h2>Admin Muhsin</h2>
+        <p>Diyafon Modu</p>
+        <div class="audio-duration" id="audioDuration">00:00</div>
+      </div>
+      <div class="audio-controls">
+        <button class="control-btn" id="audioMicBtn">🎤</button>
+        <button class="control-btn" id="audioSpeakerBtn">🔊</button>
+        <button class="control-btn" id="audioCameraBtn">📹</button>
+        <button class="control-btn end" id="audioEndCallBtn">☎️</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="remoteAudio" autoplay playsinline></audio>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="/static/js/ui.js"></script>
+  <script src="/static/js/chat.js"></script>
+  <script src="/static/js/webrtc.js"></script>
+  <script src="/static/js/media.js"></script>
+  <script src="/static/js/client.js"></script>
+</body>
+</html>
