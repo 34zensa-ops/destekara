@@ -109,6 +109,49 @@ def health():
     logger.info("Health check requested")
     return {"ok": True, "status": "healthy"}
 
+# OTP System
+_OTP_STORE = {}
+
+@app.post("/api/admin/request-otp")
+@limiter.limit("3 per minute")
+@csrf.exempt
+def request_otp():
+    import random
+    otp = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+    _OTP_STORE['current'] = otp
+    _OTP_STORE['timestamp'] = time.time()
+    
+    try:
+        from .telegram_bot import send_text
+        send_text(f"🔐 Admin OTP Kodu:\n\n{otp}\n\nGeçerlilik: 5 dakika")
+        logger.info(f"OTP generated and sent to Telegram")
+        return jsonify({"ok": True, "message": "OTP Telegram'a gönderildi"})
+    except Exception as e:
+        logger.error(f"OTP send error: {e}")
+        return jsonify({"ok": False, "error": "Telegram yapılandırması eksik"}), 500
+
+@app.post("/api/admin/verify-otp")
+@limiter.limit("5 per minute")
+@csrf.exempt
+def verify_otp():
+    data = request.get_json(silent=True) or {}
+    otp = data.get('otp', '').strip()
+    
+    if 'current' not in _OTP_STORE:
+        return jsonify({"ok": False, "error": "OTP bulunamadı. Lütfen yeni OTP isteyin."}), 400
+    
+    if time.time() - _OTP_STORE.get('timestamp', 0) > 300:
+        del _OTP_STORE['current']
+        return jsonify({"ok": False, "error": "OTP süresi doldu. Lütfen yeni OTP isteyin."}), 400
+    
+    if otp == _OTP_STORE['current']:
+        del _OTP_STORE['current']
+        logger.info("OTP verified successfully")
+        return jsonify({"ok": True, "message": "Giriş başarılı"})
+    else:
+        logger.warning(f"Invalid OTP attempt: {otp}")
+        return jsonify({"ok": False, "error": "Geçersiz OTP"}), 401
+
 @app.get("/api/chats")
 def get_chats():
     chats = list_chats()

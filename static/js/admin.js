@@ -8,17 +8,59 @@ let currentDbId = null;
 let currentRoomKey = null;
 let isLoggedIn = false;
 
-document.getElementById('btnOtp').onclick = () => {
+document.getElementById('btnOtp').onclick = async () => {
   const otp = document.getElementById('otp').value.trim();
-  if (otp === 'demo') {
-    isLoggedIn = true;
-    document.getElementById('otpModal').style.display = 'none';
-    document.querySelector('.admin-panel').style.display = 'flex';
-    loadChats();
-  } else {
-    alert('Geçersiz OTP');
+  if (!otp) {
+    alert('Lütfen OTP kodunu girin');
+    return;
+  }
+  
+  try {
+    const res = await fetch('/api/admin/verify-otp', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ otp })
+    });
+    
+    const data = await res.json();
+    
+    if (res.ok && data.ok) {
+      isLoggedIn = true;
+      document.getElementById('otpModal').style.display = 'none';
+      document.querySelector('.admin-panel').style.display = 'flex';
+      loadChats();
+    } else {
+      alert(data.error || 'Geçersiz OTP');
+    }
+  } catch (error) {
+    console.error('OTP verification error:', error);
+    alert('OTP doğrulama hatası: ' + error.message);
   }
 };
+
+async function requestOTP() {
+  try {
+    const res = await fetch('/api/admin/request-otp', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'}
+    });
+    
+    const data = await res.json();
+    
+    if (res.ok && data.ok) {
+      alert(data.message || 'OTP Telegram\'a gönderildi');
+    } else {
+      alert(data.error || 'OTP gönderilemedi');
+    }
+  } catch (error) {
+    console.error('OTP request error:', error);
+    alert('OTP isteme hatası: ' + error.message);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  requestOTP();
+});
 
 document.getElementById('otp').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') document.getElementById('btnOtp').click();
